@@ -34,19 +34,12 @@ module.exports.addPayMethod = async (req, res) => {
 
 }
 
-
 module.exports.getUserPayMethods = async (req, res) => {
     try {
         const id = req.userID;
 
         const paymentMethods = await PaymentModel.find({ user: id });
 
-        if (paymentMethods.length === 0) {
-
-            return res.status(404).json({
-                msg: "no payment method found"
-            })
-        }
 
         res.status(200).json({
             msg: "All payment method of logged in user",
@@ -85,9 +78,39 @@ module.exports.editPayMethod = async (req, res) => {
             return res.status(404).json({ msg: "Payment Method not found" });
         }
         res.status(200).json({
-            msg: "Edited ",
+            msg: "Payment method updated successfully",
             updatedPayMethod
         })
+    } catch (error) {
+        res.status(500).json(
+            {
+                msg: "Server error",
+                error: error.message
+            }
+        );
+    }
+}
+
+module.exports.delPayMethod = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.userID
+
+        const payment = await PaymentModel.findOneAndDelete({
+            _id: id,
+            user: userId
+        });
+
+        if (!payment) {
+            return res.status(404).json({
+                msg: "Payment method not found or unauthorized"
+            });
+        }
+        res.status(200).json({
+            msg: "Payment method deleted successfully",
+            deletedData: payment
+        });
+
     } catch (error) {
         res.status(500).json(
             {
