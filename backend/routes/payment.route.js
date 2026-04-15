@@ -10,6 +10,6 @@ paymentRouter.post("/", auth, roleCheck("user", "admin"), addPayMethod);
 
 paymentRouter.get("/", auth, roleCheck("user", "admin"), getUserPayMethods);
 
-paymentRouter.get("/:id", auth, roleCheck("user", "admin"), editPayMethod);
+paymentRouter.put("/:id", auth, roleCheck("user", "admin"), editPayMethod);
 
 module.exports = { paymentRouter };
