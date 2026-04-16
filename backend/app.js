@@ -3,10 +3,18 @@ const express = require("express");
 const { db } = require('./config/db');
 const { userRouter } = require('./routes/auth.route');
 const { paymentRouter } = require('./routes/payment.route');
-
+const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT;
+
+
+app.use(cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "token"],
+    credentials: true
+}));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
