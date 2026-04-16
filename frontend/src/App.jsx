@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AdminPanel from "./pages/AdminPanel";
 import "./styles/global.css";
 
 function App() {
@@ -22,7 +23,14 @@ function App() {
               </ProtectedRoute>
             }
           />
-          {/* Catch-all stub pages for bottom nav */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminPanel />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/tasks" element={<ProtectedRoute><StubPage title="Tasks" /></ProtectedRoute>} />
           <Route path="/promote" element={<ProtectedRoute><StubPage title="Promote" /></ProtectedRoute>} />
           <Route path="/social" element={<ProtectedRoute><StubPage title="Social" /></ProtectedRoute>} />

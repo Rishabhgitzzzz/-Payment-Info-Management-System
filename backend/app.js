@@ -4,6 +4,7 @@ const { db } = require('./config/db');
 const { userRouter } = require('./routes/auth.route');
 const { paymentRouter } = require('./routes/payment.route');
 const cors = require("cors");
+const { adminRouter } = require('./routes/admin.route');
 
 const app = express();
 const port = process.env.PORT;
@@ -23,6 +24,7 @@ db();
 
 app.use("/api/V1/user", userRouter);
 app.use("/api/V1/payment", paymentRouter);
+app.use("/api/V1/admin", adminRouter);
 
 
 app.listen(port, () => {

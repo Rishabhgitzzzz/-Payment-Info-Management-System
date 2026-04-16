@@ -26,4 +26,8 @@ export const paymentAPI = {
   delete: (id) => api.delete(`/payment/${id}`),
 };
 
+export const adminAPI = {
+  getAll: (filters) => api.get("/admin/payments", { params: filters }),
+};
+
 export default api;
