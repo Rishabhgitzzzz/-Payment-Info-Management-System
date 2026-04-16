@@ -9,7 +9,7 @@ const { adminRouter } = require('./routes/admin.route');
 const app = express();
 
 app.use(cors({
-    origin: "*",
+    origin: "https://payment-info-frontend.netlify.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "token"],
     credentials: true
