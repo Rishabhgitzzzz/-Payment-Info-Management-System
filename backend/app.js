@@ -7,8 +7,6 @@ const cors = require("cors");
 const { adminRouter } = require('./routes/admin.route');
 
 const app = express();
-const port = process.env.PORT;
-
 
 app.use(cors({
     origin: "http://localhost:5173",
@@ -27,6 +25,11 @@ app.use("/api/V1/payment", paymentRouter);
 app.use("/api/V1/admin", adminRouter);
 
 
-app.listen(port, () => {
-    console.log(`server listening to port ${port}`)
-})
+if (process.env.NODE_ENV !== "production") {
+    const port = process.env.PORT || 4000;
+    app.listen(port, () => {
+        console.log(`server listening on port ${port}`);
+    });
+}
+
+module.exports = app;
